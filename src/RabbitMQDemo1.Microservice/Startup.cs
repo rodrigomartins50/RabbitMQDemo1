@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using RabbitMQDemo1.Microservice.EventHandlers;
 
 namespace RabbitMQDemo1.Microservice
 {
@@ -43,6 +44,8 @@ namespace RabbitMQDemo1.Microservice
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            HelloEventHandler teste = new HelloEventHandler();
         }
     }
 }
