@@ -8,7 +8,7 @@
     <div>
         <label for="txtTexto">Digite um texto</label>
         <input id="txtTexto" />
-        <button type="button"><i class="far fa-paper-plane"></i> Enviar</button>
+        <button type="button" onclick="enviarTexto()"><i class="far fa-paper-plane"></i> Enviar</button>
     </div>
 </div>
 
@@ -17,7 +17,7 @@
 
         var texto = $("#txtTexto").val();
 
-        $.post("/api/home/enviarTexto"{ texto: texto }, function () {
+        $.post("/home/enviarTexto",{ texto: texto }, function () {
             alert("Texto enviado, o output do Visual Studio para visualizar sua mensagem.!");
         });
     }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
 using RabbitMQDemo1.Web.Models;
 
 namespace RabbitMQDemo1.Web.Controllers
@@ -16,10 +18,32 @@ namespace RabbitMQDemo1.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string texto)
+        public IActionResult EnviarTexto(string texto)
         {
+            var factory = new ConnectionFactory() { HostName = "rabbitmq1",
+                                                    UserName = "mqadmin",
+                                                    Password = "Admin123XX_"
+            };
+            using (var connection = factory.CreateConnection())
+            using (var channel = connection.CreateModel())
+            {
+                channel.QueueDeclare(queue: "hello",
+                                     durable: false,
+                                     exclusive: false,
+                                     autoDelete: false,
+                                     arguments: null);
 
-            return Ok(true);
+                var body = Encoding.UTF8.GetBytes(texto);
+
+                channel.BasicPublish(exchange: "",
+                                     routingKey: "hello",
+                                     basicProperties: null,
+                                     body: body);
+            }
+
+
+
+                return Ok(true);
         }
 
         public IActionResult Privacy()
