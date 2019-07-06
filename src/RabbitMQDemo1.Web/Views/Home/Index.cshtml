@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Primeira demo com rabbitMQ</h1>
+    
+    <div>
+        <label for="txtTexto">Digite um texto</label>
+        <input id="txtTexto" />
+        <button type="button"><i class="far fa-paper-plane"></i> Enviar</button>
+    </div>
+</div>
+
+<script>
+    function enviarTexto() {
+
+        var texto = $("#txtTexto").val();
+
+        $.post("/api/home/enviarTexto"{ texto: texto }, function () {
+            alert("Texto enviado, o output do Visual Studio para visualizar sua mensagem.!");
+        });
+    }
+</script>

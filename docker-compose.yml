@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+
+  rabbitmqdemo1.web:
+    image: ${DOCKER_REGISTRY-}rabbitmqdemo1web
+    build:
+      context: .
+      dockerfile: src/RabbitMQDemo1.Web/Dockerfile
+
+  rabbitmqdemo1.microservice:
+    image: ${DOCKER_REGISTRY-}rabbitmqdemo1microservice
+    build:
+      context: .
+      dockerfile: src/RabbitMQDemo1.Microservice/Dockerfile
